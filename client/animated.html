@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интерактивная схема</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tooltip-box {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            visibility: hidden;
+        }
+
+        .tooltip-line {
+            position: absolute;
+            border-left: 2px solid #007bff;
+            height: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+            visibility: hidden;
+        }
+
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px dashed rgba(0, 123, 255, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .hotspot:hover {
+            background: rgba(0, 123, 255, 0.3);
+            border: 1px solid #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+        }
+
+        .hotspot:hover + .tooltip-line,
+        .hotspot:hover + .tooltip-line + .tooltip-box {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Интерактивная схема</h1>
+    <p>Наведите курсор на детали, чтобы увидеть их названия.</p>
+    <p><strong>Откройте консоль браузера (F12 → Console), чтобы видеть координаты при движении мыши по изображению.</strong></p>
+
+    <div class="image-container">
+       
+        <img src="Снимок экрана 2025-11-12 в 23.31.31.png" alt="Схема" id="schema-image" width="800">
+
+        <!-- Деталь 1 -->
+        <div class="hotspot" style="top: 100px; left: 150px; width: 60px; height: 40px;" data-name="Деталь 1: Труба подачи"></div>
+        <div class="tooltip-line" style="left: 210px; top: 120px;"></div>
+        <div class="tooltip-box" style="left: 220px; top: 110px;">Деталь 1: Труба подачи</div>
+
+        <!-- Деталь 2 -->
+        <div class="hotspot" style="top: 180px; left: 220px; width: 50px; height: 50px;" data-name="Деталь 2: Клапан"></div>
+        <div class="tooltip-line" style="left: 270px; top: 205px;"></div>
+        <div class="tooltip-box" style="left: 280px; top: 195px;">Деталь 2: Клапан</div>
+
+        <!-- Деталь 3 -->
+        <div class="hotspot" style="top: 250px; left: 300px; width: 70px; height: 30px;" data-name="Деталь 3: Фитинг"></div>
+        <div class="tooltip-line" style="left: 370px; top: 265px;"></div>
+        <div class="tooltip-box" style="left: 380px; top: 255px;">Деталь 3: Фитинг</div>
+
+        <!-- Деталь 4 -->
+        <div class="hotspot" style="top: 300px; left: 100px; width: 40px; height: 60px;" data-name="Деталь 4: Слив"></div>
+        <div class="tooltip-line" style="left: 140px; top: 330px;"></div>
+        <div class="tooltip-box" style="left: 150px; top: 320px;">Деталь 4: Слив</div>
+
+        <!-- Деталь 5 -->
+        <div class="hotspot" style="top: 120px; left: 400px; width: 55px; height: 35px;" data-name="Деталь 5: Датчик"></div>
+        <div class="tooltip-line" style="left: 455px; top: 137px;"></div>
+        <div class="tooltip-box" style="left: 465px; top: 127px;">Деталь 5: Датчик</div>
+
+        <!-- Деталь 6 -->
+        <div class="hotspot" style="top: 350px; left: 450px; width: 65px; height: 45px;" data-name="Деталь 6: Резервуар"></div>
+        <div class="tooltip-line" style="left: 515px; top: 372px;"></div>
+        <div class="tooltip-box" style="left: 525px; top: 362px;">Деталь 6: Резервуар</div>
+
+        <!-- Деталь 7 -->
+        <div class="hotspot" style="top: 200px; left: 500px; width: 40px; height: 40px;" data-name="Деталь 7: Крышка"></div>
+        <div class="tooltip-line" style="left: 540px; top: 220px;"></div>
+        <div class="tooltip-box" style="left: 550px; top: 210px;">Деталь 7: Крышка</div>
+
+        <!-- Деталь 8 -->
+        <div class="hotspot" style="top: 150px; left: 600px; width: 80px; height: 25px;" data-name="Деталь 8: Крепёж"></div>
+        <div class="tooltip-line" style="left: 680px; top: 162px;"></div>
+        <div class="tooltip-box" style="left: 690px; top: 152px;">Деталь 8: Крепёж</div>
+
+        <!-- Деталь 9 -->
+        <div class="hotspot" style="top: 280px; left: 650px; width: 50px; height: 50px;" data-name="Деталь 9: Уплотнение"></div>
+        <div class="tooltip-line" style="left: 700px; top: 305px;"></div>
+        <div class="tooltip-box" style="left: 710px; top: 295px;">Деталь 9: Уплотнение</div>
+
+        <!-- Деталь 10 -->
+        <div class="hotspot" style="top: 50px; left: 350px; width: 90px; height: 40px;" data-name="Деталь 10: Корпус"></div>
+        <div class="tooltip-line" style="left: 440px; top: 70px;"></div>
+        <div class="tooltip-box" style="left: 450px; top: 60px;">Деталь 10: Корпус</div>
+
+    </div>
+
+    <script>
+       
+        document.getElementById('schema-image').addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            console.log(`X: ${Math.round(x)}, Y: ${Math.round(y)}`);
+        });
+    </script>
+
+</body>
+</html>
