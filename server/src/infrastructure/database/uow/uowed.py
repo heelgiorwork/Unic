@@ -127,8 +127,10 @@ class UnitOfWork:
 class UnitOfWorkAlchemyContext(AbstractUnitOfWorkContext):
     def __init__(self, session: AsyncSession) -> None:
         self.session = session
+        print(f"🔵 UoWContext created with session: {id(session)}")
 
-    async def on_enter(self, uow: UnitOfWork) -> None: ...
+    async def on_enter(self, uow: UnitOfWork) -> None:
+        print(f"🟢 UoW enter, session: {id(self.session)}")
 
     async def on_exit(
         self,
@@ -139,15 +141,18 @@ class UnitOfWorkAlchemyContext(AbstractUnitOfWorkContext):
     ) -> None:
         try:
             if exc_type:
+                print(f"🔴 Exception occurred: {exc_type.__name__}: {exc_val}")
                 await self.session.rollback()
                 return
 
-            if uow.new or uow.dirty or uow.deleted:
-                await uow.commit()
-                await self.session.commit()
-            else:
-                await self.session.close()
+            print("🟢 Committing changes...")
+            await uow.commit()
+            await self.session.commit()
+            print("✅ Committed successfully")
 
-        except:
+        except Exception as err:  # ← err
+            print(f"❌ Error during commit: {err}")  # ← err, НЕ e
             await self.session.rollback()
             raise
+        finally:
+            await self.session.close()

@@ -1,0 +1,24 @@
+from abc import abstractmethod
+from typing import Protocol
+
+from src.core.value_objects.user_id import UserId
+from src.infrastructure.auth.session.model import AuthSession
+
+
+class AuthSessionGateway(Protocol):
+    """
+    Defined to allow easier mocking and swapping
+    of implementations in the same layer.
+    """
+
+    @abstractmethod
+    async def read_by_id(self, auth_session_id: str) -> AuthSession | None:
+        """:raises DataMapperError:"""
+
+    @abstractmethod
+    async def read_all_for_user(self, user_id: UserId) -> list[AuthSession]:
+        """:raises DataMapperError:"""
+
+    @abstractmethod
+    async def delete_all_for_user(self, user_id: UserId) -> None:
+        """:raises DataMapperError:"""

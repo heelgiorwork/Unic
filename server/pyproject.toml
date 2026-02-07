@@ -7,11 +7,20 @@ dependencies = [
     "asyncpg~=0.30.0",
     "dishka~=1.6.0",
     "fastapi>=0.120.2",
+    "fastapi-error-map>=0.9.8",
     "loguru~=0.7.3",
     "pydantic-settings~=2.11.0",
     "uvicorn>=0.38.0",
     "cryptography>=46.0.3",
     "sqlalchemy[mypy]>=2.0.0",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.20",
+    "passlib[bcrypt]==1.7.4",
+    "bcrypt==4.0.1",
+    "types-python-jose>=3.5.0.20250531",
+    "types-passlib>=1.7.7.20250602",
+    "uuid-utils>=0.14.0",
+    "pyjwt>=2.11.0",
 ]
 
 [dependency-groups]
