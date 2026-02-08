@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>УНИЦ | Панель управления</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .header { position: static; }
+        .user-info { 
+            margin-right: 15px; 
+            color: #0033a0; 
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>Панель управления</h1>
+                </div>
+                <div class="header-actions">
+                    <span class="user-info">Пользователь: admin</span>
+                    <button onclick="logout()" class="login-btn" style="background: white; color: #0033a0; border: 1px solid #0033a0;">
+                        Выйти
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Форма создания поста -->
+        <div class="card">
+            <h2 style="color: #0033a0; margin-bottom: 20px;">📝 Создать новый пост</h2>
+            <form id="createPostForm">
+                <input type="text" id="postTitle" placeholder="Заголовок поста" required>
+                <textarea id="postContent" rows="5" placeholder="Содержание поста..." required></textarea>
+                <button type="submit" class="btn btn-primary">Опубликовать</button>
+            </form>
+        </div>
+
+        <!-- Список постов -->
+        <div class="card">
+            <div class="section-header">
+                <h2 style="color: #0033a0; margin: 0;">📰 Мои посты</h2>
+                <div style="display: flex; gap: 10px;">
+                    <select id="filterPosts">
+                        <option value="all">Все посты</option>
+                        <option value="draft">Черновики</option>
+                        <option value="published">Опубликованные</option>
+                    </select>
+                    <button onclick="loadPosts()" class="btn">Обновить</button>
+                </div>
+            </div>
+            
+            <div id="postsList">
+                <p style="text-align: center; color: #666; padding: 40px;">
+                    Постов пока нет. Создайте первый!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модалка редактирования -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #0033a0; margin-bottom: 20px;">✏️ Редактировать пост</h2>
+            <form id="editPostForm">
+                <input type="hidden" id="editPostId">
+                <input type="text" id="editPostTitle" required style="margin-bottom: 15px;">
+                <textarea id="editPostContent" rows="6" required style="margin-bottom: 20px;"></textarea>
+                <div class="modal-actions">
+                    <button type="button" class="btn" onclick="closeModal()">Отмена</button>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="posts.js"></script>
+</body>
+</html>
